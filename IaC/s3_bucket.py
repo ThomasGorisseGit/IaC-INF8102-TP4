@@ -1,4 +1,3 @@
-# Fichier : s3_bucket.py (CORRECTION FINALE pour Troposphere 4.9.5)
 
 from troposphere import Template, s3, kms, Ref, Join, GetAtt, Output, Tags, cloudtrail, iam
 from awacs.aws import Allow, Statement, Principal, Policy, Action, Condition, StringEquals
@@ -12,7 +11,6 @@ PROJECT_NAME = "polystudentlab"
 BUCKET_NAME = "polystudens3" 
 REPLICA_BUCKET_NAME = "polystudents3-back" 
 
-# --- A. Clé KMS Gérée par le Client (CMK) (Q2) ---
 key_policy = Policy(
     Statement=[
         Statement(
@@ -47,9 +45,6 @@ s3KMSKey = t.add_resource(kms.Key(
     Tags=Tags({"Name": Join("-", [PROJECT_NAME, "s3-kms-key"])})
 ))
 
-# ----------------------------------------------------------------------------------
-# Q3.3 (1): Rôle IAM pour S3 Replication
-# ----------------------------------------------------------------------------------
 replicationRole = t.add_resource(iam.Role(
     "ReplicationRole",
     AssumeRolePolicyDocument=Policy(
@@ -101,9 +96,6 @@ replicationRole = t.add_resource(iam.Role(
 ))
 
 
-# ----------------------------------------------------------------------------------
-# Q3.3 (1): S3 Bucket de Destination
-# ----------------------------------------------------------------------------------
 replicaBucket = t.add_resource(s3.Bucket(
     "PolystudentS3ReplicaBucket",
     BucketName=REPLICA_BUCKET_NAME,
@@ -112,9 +104,6 @@ replicaBucket = t.add_resource(s3.Bucket(
 ))
 
 
-# ----------------------------------------------------------------------------------
-# Q2 & Q3.3 (1): S3 Bucket Source avec Réplication
-# ----------------------------------------------------------------------------------
 s3Bucket = t.add_resource(s3.Bucket(
     "PolystudentS3Bucket",
     BucketName=BUCKET_NAME,
@@ -136,7 +125,6 @@ s3Bucket = t.add_resource(s3.Bucket(
         BlockPublicAcls=True, BlockPublicPolicy=True, IgnorePublicAcls=True, RestrictPublicBuckets=True
     ),
     
-    # Q3.3 (1) Configuration de Réplication
     ReplicationConfiguration=s3.ReplicationConfiguration(
         Role=GetAtt(replicationRole, "Arn"),
         Rules=[
@@ -145,7 +133,6 @@ s3Bucket = t.add_resource(s3.Bucket(
                 Status="Enabled",
                 Priority=1,
                 Destination=s3.ReplicationConfigurationRulesDestination(
-                    # CORRECTION FINALE : Retour à l'attribut 'Bucket'
                     Bucket=GetAtt(replicaBucket, "Arn"),
                     EncryptionConfiguration=s3.EncryptionConfiguration(
                         ReplicaKmsKeyID=Ref(s3KMSKey) 
@@ -161,9 +148,6 @@ s3Bucket = t.add_resource(s3.Bucket(
 ))
 
 
-# ----------------------------------------------------------------------------------
-# Q3.3 (2): CloudTrail Trail pour le Plan de Données (Data Events)
-# ----------------------------------------------------------------------------------
 trail = t.add_resource(cloudtrail.Trail(
     "S3ObjectAccessTrail",
     IsLogging=True,
@@ -186,9 +170,7 @@ trail = t.add_resource(cloudtrail.Trail(
     Tags=Tags({"Name": Join("-", [PROJECT_NAME, "s3-cloudtrail"])})
 ))
 
-# Exporter les ARNs
 t.add_output(Output("S3BucketArn", Value=Join("", ["arn:aws:s3:::", Ref(s3Bucket)]), Description="ARN of the secure S3 bucket."))
 t.add_output(Output("S3ReplicaBucketArn", Value=Join("", ["arn:aws:s3:::", Ref(replicaBucket)]), Description="ARN of the replica S3 bucket."))
 
-# Génération du template
 print(t.to_yaml())

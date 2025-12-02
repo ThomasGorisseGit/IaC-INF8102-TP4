@@ -1,0 +1,1307 @@
+﻿{
+  "SchemaVersion": 2,
+  "CreatedAt": "2025-12-02T13:58:50.1385497-05:00",
+  "ArtifactName": "vpc.yaml",
+  "ArtifactType": "filesystem",
+  "Results": [
+    {
+      "Target": "vpc.yaml",
+      "Class": "config",
+      "Type": "cloudformation",
+      "MisconfSummary": {
+        "Successes": 13,
+        "Failures": 11
+      },
+      "Misconfigurations": [
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0028",
+          "AVDID": "AVD-AWS-0028",
+          "Title": "aws_instance should activate session tokens for Instance Metadata Service.",
+          "Description": "IMDS v2 (Instance Metadata Service) introduced session authentication tokens which improve security when talking to IMDS.\n\nBy default \u003ccode\u003eaws_instance\u003c/code\u003e resource sets IMDS session auth tokens to be optional.\n\nTo fully protect IMDS you need to enable session tokens by using \u003ccode\u003emetadata_options\u003c/code\u003e block and its \u003ccode\u003ehttp_tokens\u003c/code\u003e variable set to \u003ccode\u003erequired\u003c/code\u003e.\n",
+          "Message": "Instance does not require IMDS access to require a token.",
+          "Namespace": "builtin.aws.ec2.aws0028",
+          "Query": "data.builtin.aws.ec2.aws0028.deny",
+          "Resolution": "Enable HTTP token requirement for IMDS",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0028",
+          "References": [
+            "https://aws.amazon.com/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service",
+            "https://avd.aquasec.com/misconfig/avd-aws-0028"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "vpc.yaml:116-130",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 116,
+            "EndLine": 130,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 116,
+                  "Content": "\u0000 \u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00001\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00001\u0000:\u0000",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 117,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 118,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 119,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 120,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 121,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000I\u0000d\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 122,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 123,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000I\u0000d\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00001\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 124,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000T\u0000a\u0000g\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 125,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0028",
+          "AVDID": "AVD-AWS-0028",
+          "Title": "aws_instance should activate session tokens for Instance Metadata Service.",
+          "Description": "IMDS v2 (Instance Metadata Service) introduced session authentication tokens which improve security when talking to IMDS.\n\nBy default \u003ccode\u003eaws_instance\u003c/code\u003e resource sets IMDS session auth tokens to be optional.\n\nTo fully protect IMDS you need to enable session tokens by using \u003ccode\u003emetadata_options\u003c/code\u003e block and its \u003ccode\u003ehttp_tokens\u003c/code\u003e variable set to \u003ccode\u003erequired\u003c/code\u003e.\n",
+          "Message": "Instance does not require IMDS access to require a token.",
+          "Namespace": "builtin.aws.ec2.aws0028",
+          "Query": "data.builtin.aws.ec2.aws0028.deny",
+          "Resolution": "Enable HTTP token requirement for IMDS",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0028",
+          "References": [
+            "https://aws.amazon.com/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service",
+            "https://avd.aquasec.com/misconfig/avd-aws-0028"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "vpc.yaml:131-145",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 131,
+            "EndLine": 145,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 131,
+                  "Content": "\u0000 \u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00002\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00002\u0000:\u0000",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 132,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 133,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 134,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 135,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 136,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000I\u0000d\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 137,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 138,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000I\u0000d\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00002\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 139,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000T\u0000a\u0000g\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 140,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0028",
+          "AVDID": "AVD-AWS-0028",
+          "Title": "aws_instance should activate session tokens for Instance Metadata Service.",
+          "Description": "IMDS v2 (Instance Metadata Service) introduced session authentication tokens which improve security when talking to IMDS.\n\nBy default \u003ccode\u003eaws_instance\u003c/code\u003e resource sets IMDS session auth tokens to be optional.\n\nTo fully protect IMDS you need to enable session tokens by using \u003ccode\u003emetadata_options\u003c/code\u003e block and its \u003ccode\u003ehttp_tokens\u003c/code\u003e variable set to \u003ccode\u003erequired\u003c/code\u003e.\n",
+          "Message": "Instance does not require IMDS access to require a token.",
+          "Namespace": "builtin.aws.ec2.aws0028",
+          "Query": "data.builtin.aws.ec2.aws0028.deny",
+          "Resolution": "Enable HTTP token requirement for IMDS",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0028",
+          "References": [
+            "https://aws.amazon.com/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service",
+            "https://avd.aquasec.com/misconfig/avd-aws-0028"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "vpc.yaml:202-216",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 202,
+            "EndLine": 216,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 202,
+                  "Content": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00001\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00001\u0000:\u0000",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 203,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 204,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 205,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 206,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 207,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000I\u0000d\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 208,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 209,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000I\u0000d\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00001\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 210,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000T\u0000a\u0000g\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 211,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0028",
+          "AVDID": "AVD-AWS-0028",
+          "Title": "aws_instance should activate session tokens for Instance Metadata Service.",
+          "Description": "IMDS v2 (Instance Metadata Service) introduced session authentication tokens which improve security when talking to IMDS.\n\nBy default \u003ccode\u003eaws_instance\u003c/code\u003e resource sets IMDS session auth tokens to be optional.\n\nTo fully protect IMDS you need to enable session tokens by using \u003ccode\u003emetadata_options\u003c/code\u003e block and its \u003ccode\u003ehttp_tokens\u003c/code\u003e variable set to \u003ccode\u003erequired\u003c/code\u003e.\n",
+          "Message": "Instance does not require IMDS access to require a token.",
+          "Namespace": "builtin.aws.ec2.aws0028",
+          "Query": "data.builtin.aws.ec2.aws0028.deny",
+          "Resolution": "Enable HTTP token requirement for IMDS",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0028",
+          "References": [
+            "https://aws.amazon.com/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service",
+            "https://avd.aquasec.com/misconfig/avd-aws-0028"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "vpc.yaml:217-231",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 217,
+            "EndLine": 231,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 217,
+                  "Content": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00002\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00002\u0000:\u0000",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 218,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 219,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 220,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 221,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 222,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000I\u0000d\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 223,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 224,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000I\u0000d\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00002\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 225,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000T\u0000a\u0000g\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 226,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0107",
+          "AVDID": "AVD-AWS-0107",
+          "Title": "Security groups should not allow unrestricted ingress to SSH or RDP from any IP address.",
+          "Description": "Security groups provide stateful filtering of ingress and egress network traffic to AWS\nresources. It is recommended that no security group allows unrestricted ingress access to\nremote server administration ports, such as SSH to port 22 and RDP to port 3389.\n",
+          "Message": "Security group rule allows unrestricted ingress from any IP address.",
+          "Namespace": "builtin.aws.ec2.aws0107",
+          "Query": "data.builtin.aws.ec2.aws0107.deny",
+          "Resolution": "Set a more restrictive CIDR range",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0107",
+          "References": [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html#ec2-13",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html#ec2-14",
+            "https://avd.aquasec.com/misconfig/avd-aws-0107"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "LabSecurityGroup",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 81,
+            "EndLine": 81,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 77,
+                  "Content": "\u0000 \u0000 \u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000:\u0000\r\u0000",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 78,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 81,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000C\u0000i\u0000d\u0000r\u0000I\u0000p\u0000:\u0000 \u0000'\u00000\u0000.\u00000\u0000.\u00000\u0000.\u00000\u0000/\u00000\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000G\u0000r\u0000o\u0000u\u0000p\u0000D\u0000e\u0000s\u0000c\u0000r\u0000i\u0000p\u0000t\u0000i\u0000o\u0000n\u0000:\u0000 \u0000A\u0000l\u0000l\u0000o\u0000w\u0000 \u0000S\u0000S\u0000H\u0000 \u0000a\u0000c\u0000c\u0000e\u0000s\u0000s\u0000 \u0000a\u0000n\u0000d\u0000 \u0000a\u0000l\u0000l\u0000 \u0000i\u0000n\u0000t\u0000e\u0000r\u0000n\u0000a\u0000l\u0000 \u0000t\u0000r\u0000a\u0000f\u0000f\u0000i\u0000c\u0000",
+                  "FirstCause": true,
+                  "LastCause": true
+                },
+                {
+                  "Number": 93,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 94,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000A\u0000W\u0000S\u0000:\u0000:\u0000E\u0000C\u00002\u0000:\u0000:\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000\r\u0000",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            },
+            "Occurrences": [
+              {
+                "Resource": "LabSecurityGroup",
+                "Filename": "vpc.yaml",
+                "Location": {
+                  "StartLine": 77,
+                  "EndLine": 94
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0131",
+          "AVDID": "AVD-AWS-0131",
+          "Title": "Instance with unencrypted block device.",
+          "Description": "Block devices should be encrypted to ensure sensitive data is held securely at rest.\n",
+          "Message": "Root block device is not encrypted.",
+          "Namespace": "builtin.aws.ec2.aws0131",
+          "Query": "data.builtin.aws.ec2.aws0131.deny",
+          "Resolution": "Turn on encryption for all block devices",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0131",
+          "References": [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/RootDeviceStorage.html",
+            "https://avd.aquasec.com/misconfig/avd-aws-0131"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "vpc.yaml:116-130",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 116,
+            "EndLine": 130,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 116,
+                  "Content": "\u0000 \u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00001\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00001\u0000:\u0000",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 117,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 118,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 119,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 120,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 121,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000I\u0000d\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 122,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 123,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000I\u0000d\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00001\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 124,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000T\u0000a\u0000g\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 125,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0131",
+          "AVDID": "AVD-AWS-0131",
+          "Title": "Instance with unencrypted block device.",
+          "Description": "Block devices should be encrypted to ensure sensitive data is held securely at rest.\n",
+          "Message": "Root block device is not encrypted.",
+          "Namespace": "builtin.aws.ec2.aws0131",
+          "Query": "data.builtin.aws.ec2.aws0131.deny",
+          "Resolution": "Turn on encryption for all block devices",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0131",
+          "References": [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/RootDeviceStorage.html",
+            "https://avd.aquasec.com/misconfig/avd-aws-0131"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "vpc.yaml:131-145",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 131,
+            "EndLine": 145,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 131,
+                  "Content": "\u0000 \u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00002\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00002\u0000:\u0000",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 132,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 133,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 134,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 135,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 136,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000I\u0000d\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 137,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 138,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000I\u0000d\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000P\u0000r\u0000i\u0000v\u0000a\u0000t\u0000e\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00002\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 139,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000T\u0000a\u0000g\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 140,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0131",
+          "AVDID": "AVD-AWS-0131",
+          "Title": "Instance with unencrypted block device.",
+          "Description": "Block devices should be encrypted to ensure sensitive data is held securely at rest.\n",
+          "Message": "Root block device is not encrypted.",
+          "Namespace": "builtin.aws.ec2.aws0131",
+          "Query": "data.builtin.aws.ec2.aws0131.deny",
+          "Resolution": "Turn on encryption for all block devices",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0131",
+          "References": [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/RootDeviceStorage.html",
+            "https://avd.aquasec.com/misconfig/avd-aws-0131"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "vpc.yaml:202-216",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 202,
+            "EndLine": 216,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 202,
+                  "Content": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00001\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00001\u0000:\u0000",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 203,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 204,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 205,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 206,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 207,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000I\u0000d\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 208,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 209,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000I\u0000d\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00001\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 210,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000T\u0000a\u0000g\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 211,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "AVD-AWS-0131",
+          "AVDID": "AVD-AWS-0131",
+          "Title": "Instance with unencrypted block device.",
+          "Description": "Block devices should be encrypted to ensure sensitive data is held securely at rest.\n",
+          "Message": "Root block device is not encrypted.",
+          "Namespace": "builtin.aws.ec2.aws0131",
+          "Query": "data.builtin.aws.ec2.aws0131.deny",
+          "Resolution": "Turn on encryption for all block devices",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/avd-aws-0131",
+          "References": [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/RootDeviceStorage.html",
+            "https://avd.aquasec.com/misconfig/avd-aws-0131"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "vpc.yaml:217-231",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 217,
+            "EndLine": 231,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 217,
+                  "Content": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00002\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000A\u0000Z\u00002\u0000:\u0000",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 218,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 219,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000P\u0000r\u0000o\u0000p\u0000e\u0000r\u0000t\u0000i\u0000e\u0000s\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 220,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 221,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000a\u0000m\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000P\u0000r\u0000o\u0000f\u0000i\u0000l\u0000e\u0000'\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 222,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000I\u0000d\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 223,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000-\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000L\u0000a\u0000b\u0000S\u0000e\u0000c\u0000u\u0000r\u0000i\u0000t\u0000y\u0000G\u0000r\u0000o\u0000u\u0000p\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000m\u0000a\u0000g\u0000e\u0000I\u0000d\u0000:\u0000 \u0000a\u0000m\u0000i\u0000-\u00000\u00005\u00003\u0000b\u00000\u00001\u0000d\u00005\u00001\u0000d\u0000e\u00005\u0000a\u00004\u00003\u00005\u00008\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 224,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000I\u0000d\u0000:\u0000 \u0000!\u0000R\u0000e\u0000f\u0000 \u0000'\u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00002\u0000'\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 225,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000T\u0000a\u0000g\u0000s\u0000:\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000I\u0000n\u0000s\u0000t\u0000a\u0000n\u0000c\u0000e\u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000t\u00002\u0000.\u0000m\u0000i\u0000c\u0000r\u0000o\u0000",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 226,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "aws-vpc-no-public-ingress-sgr",
+          "AVDID": "AVD-AWS-0164",
+          "Title": "Instances in a subnet should not receive a public IP address by default.",
+          "Description": "You should limit the provision of public IP addresses for resources. Resources should not be exposed on the public internet, but should have access limited to consumers required for the function of your application.\n",
+          "Message": "Subnet associates public IP address.",
+          "Namespace": "builtin.aws.ec2.aws0164",
+          "Query": "data.builtin.aws.ec2.aws0164.deny",
+          "Resolution": "Set the instance to not be publicly accessible",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/aws-vpc-no-public-ingress-sgr",
+          "References": [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses",
+            "https://avd.aquasec.com/misconfig/aws-vpc-no-public-ingress-sgr"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "PublicSubnetAZ1",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 256,
+            "EndLine": 256,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 249,
+                  "Content": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00001\u0000:\u0000\r\u0000",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00001\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 250,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 256,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000M\u0000a\u0000p\u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000p\u0000O\u0000n\u0000L\u0000a\u0000u\u0000n\u0000c\u0000h\u0000:\u0000 \u0000t\u0000r\u0000u\u0000e\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": true,
+                  "LastCause": true
+                },
+                {
+                  "Number": 263,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 264,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000A\u0000W\u0000S\u0000:\u0000:\u0000E\u0000C\u00002\u0000:\u0000:\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000\r\u0000",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            },
+            "Occurrences": [
+              {
+                "Resource": "PublicSubnetAZ1",
+                "Filename": "vpc.yaml",
+                "Location": {
+                  "StartLine": 249,
+                  "EndLine": 264
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Type": "CloudFormation Security Check",
+          "ID": "aws-vpc-no-public-ingress-sgr",
+          "AVDID": "AVD-AWS-0164",
+          "Title": "Instances in a subnet should not receive a public IP address by default.",
+          "Description": "You should limit the provision of public IP addresses for resources. Resources should not be exposed on the public internet, but should have access limited to consumers required for the function of your application.\n",
+          "Message": "Subnet associates public IP address.",
+          "Namespace": "builtin.aws.ec2.aws0164",
+          "Query": "data.builtin.aws.ec2.aws0164.deny",
+          "Resolution": "Set the instance to not be publicly accessible",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/aws-vpc-no-public-ingress-sgr",
+          "References": [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses",
+            "https://avd.aquasec.com/misconfig/aws-vpc-no-public-ingress-sgr"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "PublicSubnetAZ2",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 272,
+            "EndLine": 272,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 265,
+                  "Content": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00002\u0000:\u0000\r\u0000",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000 \u0000 \u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000A\u0000Z\u00002\u0000:\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 266,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 272,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000 \u0000 \u0000M\u0000a\u0000p\u0000P\u0000u\u0000b\u0000l\u0000i\u0000c\u0000I\u0000p\u0000O\u0000n\u0000L\u0000a\u0000u\u0000n\u0000c\u0000h\u0000:\u0000 \u0000t\u0000r\u0000u\u0000e\u0000\r\u0000",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": true,
+                  "LastCause": true
+                },
+                {
+                  "Number": 279,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 280,
+                  "Content": "\u0000 \u0000 \u0000 \u0000 \u0000T\u0000y\u0000p\u0000e\u0000:\u0000 \u0000A\u0000W\u0000S\u0000:\u0000:\u0000E\u0000C\u00002\u0000:\u0000:\u0000S\u0000u\u0000b\u0000n\u0000e\u0000t\u0000\r\u0000",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u0000",
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            },
+            "Occurrences": [
+              {
+                "Resource": "PublicSubnetAZ2",
+                "Filename": "vpc.yaml",
+                "Location": {
+                  "StartLine": 265,
+                  "EndLine": 280
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+

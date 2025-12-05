@@ -12,7 +12,7 @@ PRIVATE_SUBNET_AZ1_CIDR = "10.0.10.0/24"
 PRIVATE_SUBNET_AZ2_CIDR = "10.0.20.0/24"
 PROJECT_NAME = "polystudentlab"
 VPC_NAME = "polystudent-vpc1"
-FLOW_LOG_BUCKET_NAME = "polystudens3" 
+FLOW_LOG_BUCKET_NAME = "polystudens3-596556162691" 
 AMI_ID = "ami-053b01d51de5a4358" 
 INSTANCE_TYPE = "t2.micro" 
 
@@ -48,16 +48,7 @@ flowLogRole = t.add_resource(iam.Role(
     Tags=Tags({"Name": Join("-", [PROJECT_NAME, "flowlog-role"])})
 ))
 
-labRole = t.add_resource(iam.Role(
-    "LabRole",
-    AssumeRolePolicyDocument=Policy(
-        Statement=[Statement(Effect=Allow, Principal=Principal("Service", "ec2.amazonaws.com"), Action=[AssumeRole])]
-    ),
-    ManagedPolicyArns=["arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"], 
-    Tags=Tags({"Name": Join("-", [PROJECT_NAME, "lab-role"])})
-))
-
-labInstanceProfile = t.add_resource(iam.InstanceProfile("LabInstanceProfile", Roles=[Ref(labRole)]))
+labInstanceProfile = t.add_resource(iam.InstanceProfile("LabInstanceProfile", Roles=["LabRole"]))
 
 vpc = t.add_resource(ec2.VPC(
     "VPC", CidrBlock=VPC_CIDR, EnableDnsSupport="true", EnableDnsHostnames="true", Tags=Tags({"Name": VPC_NAME})

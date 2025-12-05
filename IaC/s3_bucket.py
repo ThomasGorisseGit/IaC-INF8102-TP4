@@ -8,8 +8,9 @@ t = Template()
 t.set_description("TP4 INF8102 - Secure S3 Bucket polystudens3 with KMS, Versioning, Replication, and CloudTrail")
 
 PROJECT_NAME = "polystudentlab"
-BUCKET_NAME = "polystudens3" 
-REPLICA_BUCKET_NAME = "polystudents3-back" 
+BUCKET_NAME = "polystudens3-596556162691" 
+REPLICA_BUCKET_NAME = "polystudents3-back-596556162691"
+MY_KMS_ARN = "arn:aws:kms:us-east-1:596556162691:key/c41c9b30-c57e-424d-aa3b-634e00109bd8"
 
 key_policy = Policy(
     Statement=[
@@ -35,15 +36,6 @@ key_policy = Policy(
         )
     ]
 )
-
-s3KMSKey = t.add_resource(kms.Key(
-    "S3EncryptionKey",
-    KeyPolicy=key_policy,
-    Description=Join("-", [PROJECT_NAME, "s3-encryption-key"]),
-    Enabled=True,
-    EnableKeyRotation=True, 
-    Tags=Tags({"Name": Join("-", [PROJECT_NAME, "s3-kms-key"])})
-))
 
 replicationRole = t.add_resource(iam.Role(
     "ReplicationRole",
@@ -86,7 +78,7 @@ replicationRole = t.add_resource(iam.Role(
                         Sid="AllowKMSUsage",
                         Effect=Allow,
                         Action=[Encrypt, Decrypt], 
-                        Resource=[GetAtt(s3KMSKey, "Arn")]
+                        Resource=[MY_KMS_ARN]
                     )
                 ]
             )
@@ -114,7 +106,7 @@ s3Bucket = t.add_resource(s3.Bucket(
         ServerSideEncryptionConfiguration=[
             s3.ServerSideEncryptionRule(
                 ServerSideEncryptionByDefault=s3.ServerSideEncryptionByDefault(
-                    KMSMasterKeyID=Ref(s3KMSKey),
+                    KMSMasterKeyID="arn:aws:kms:us-east-1:596556162691:key/c41c9b30-c57e-424d-aa3b-634e00109bd8",
                     SSEAlgorithm="aws:kms",
                 )
             )
@@ -135,7 +127,7 @@ s3Bucket = t.add_resource(s3.Bucket(
                 Destination=s3.ReplicationConfigurationRulesDestination(
                     Bucket=GetAtt(replicaBucket, "Arn"),
                     EncryptionConfiguration=s3.EncryptionConfiguration(
-                        ReplicaKmsKeyID=Ref(s3KMSKey) 
+                        ReplicaKmsKeyID=MY_KMS_ARN
                     )
                 ),
                 SourceSelectionCriteria=s3.SourceSelectionCriteria(

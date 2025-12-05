@@ -1,0 +1,230 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: TP4 INF8102 - VPC, Subnets, Flow Logs, EC2 Instances, and CloudWatch Alarm
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: polystudent-vpc1
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: polystudentlab-igw
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref 'InternetGateway'
+      VpcId: !Ref 'VPC'
+  PublicSubnetAZ1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref 'VPC'
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs {Ref: 'AWS::Region'}]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: polystudentlab-public-az1
+  PublicSubnetAZ2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref 'VPC'
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: !Select [1, !GetAZs {Ref: 'AWS::Region'}]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: polystudentlab-public-az2
+  PrivateSubnetAZ1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref 'VPC'
+      CidrBlock: 10.0.10.0/24
+      AvailabilityZone: !Select [0, !GetAZs {Ref: 'AWS::Region'}]
+      Tags:
+        - Key: Name
+          Value: polystudentlab-private-az1
+  PrivateSubnetAZ2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref 'VPC'
+      CidrBlock: 10.0.20.0/24
+      AvailabilityZone: !Select [1, !GetAZs {Ref: 'AWS::Region'}]
+      Tags:
+        - Key: Name
+          Value: polystudentlab-private-az2
+  NatGatewayEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: polystudentlab-nat-eip
+  NatGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt 'NatGatewayEIP.AllocationId'
+      SubnetId: !Ref 'PublicSubnetAZ1'
+      Tags:
+        - Key: Name
+          Value: polystudentlab-nat-az1
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref 'VPC'
+      Tags:
+        - Key: Name
+          Value: polystudentlab-public-rt
+  PublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: !Ref 'PublicRouteTable'
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref 'InternetGateway'
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref 'VPC'
+      Tags:
+        - Key: Name
+          Value: polystudentlab-private-rt
+  PrivateRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref 'PrivateRouteTable'
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref 'NatGateway'
+  PublicSubnetRouteTableAssociationAZ1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref 'PublicSubnetAZ1'
+      RouteTableId: !Ref 'PublicRouteTable'
+  PublicSubnetRouteTableAssociationAZ2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref 'PublicSubnetAZ2'
+      RouteTableId: !Ref 'PublicRouteTable'
+  PrivateSubnetRouteTableAssociationAZ1:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref 'PrivateSubnetAZ1'
+      RouteTableId: !Ref 'PrivateRouteTable'
+  PrivateSubnetRouteTableAssociationAZ2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref 'PrivateSubnetAZ2'
+      RouteTableId: !Ref 'PrivateRouteTable'
+  LabSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH access and all internal traffic
+      VpcId: !Ref 'VPC'
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: polystudentlab-lab-sg
+  
+  # Self-referencing rule split out to avoid circular dependency error
+  LabSecurityGroupSelfIngress:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref LabSecurityGroup
+      IpProtocol: -1
+      SourceSecurityGroupId: !Ref LabSecurityGroup
+
+  LabInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - LabRole
+  PublicInstanceAZ1:
+    Type: AWS::EC2::Instance
+    Properties:
+      # UPDATED AMI ID: Amazon Linux 2 (us-east-1)
+      ImageId: ami-0c614dee691cbbf37
+      InstanceType: t2.micro
+      SubnetId: !Ref 'PublicSubnetAZ1'
+      SecurityGroupIds:
+        - !Ref 'LabSecurityGroup'
+      IamInstanceProfile: !Ref 'LabInstanceProfile'
+      Tags:
+        - Key: Name
+          Value: polystudentlab-PublicInstanceAZ1
+  PublicInstanceAZ2:
+    Type: AWS::EC2::Instance
+    Properties:
+      # UPDATED AMI ID: Amazon Linux 2 (us-east-1)
+      ImageId: ami-0c614dee691cbbf37
+      InstanceType: t2.micro
+      SubnetId: !Ref 'PublicSubnetAZ2'
+      SecurityGroupIds:
+        - !Ref 'LabSecurityGroup'
+      IamInstanceProfile: !Ref 'LabInstanceProfile'
+      Tags:
+        - Key: Name
+          Value: polystudentlab-PublicInstanceAZ2
+  PrivateInstanceAZ1:
+    Type: AWS::EC2::Instance
+    Properties:
+      # UPDATED AMI ID: Amazon Linux 2 (us-east-1)
+      ImageId: ami-0c614dee691cbbf37
+      InstanceType: t2.micro
+      SubnetId: !Ref 'PrivateSubnetAZ1'
+      SecurityGroupIds:
+        - !Ref 'LabSecurityGroup'
+      IamInstanceProfile: !Ref 'LabInstanceProfile'
+      Tags:
+        - Key: Name
+          Value: polystudentlab-PrivateInstanceAZ1
+  PrivateInstanceAZ2:
+    Type: AWS::EC2::Instance
+    Properties:
+      # UPDATED AMI ID: Amazon Linux 2 (us-east-1)
+      ImageId: ami-0c614dee691cbbf37
+      InstanceType: t2.micro
+      SubnetId: !Ref 'PrivateSubnetAZ2'
+      SecurityGroupIds:
+        - !Ref 'LabSecurityGroup'
+      IamInstanceProfile: !Ref 'LabInstanceProfile'
+      Tags:
+        - Key: Name
+          Value: polystudentlab-PrivateInstanceAZ2
+  VPCFlowLog:
+    Type: AWS::EC2::FlowLog
+    Properties:
+      ResourceId: !Ref 'VPC'
+      ResourceType: VPC
+      TrafficType: REJECT
+      LogDestinationType: s3
+      LogDestination: arn:aws:s3:::polystudens3-596556162691
+      Tags:
+        - Key: Name
+          Value: polystudentlab-vpc-flow-log
+  TrafficAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Alarm if ingress traffic exceeds 1000 packets/sec average
+      MetricName: NetworkPacketsIn
+      Namespace: AWS/EC2
+      Statistic: Average
+      Period: 60
+      EvaluationPeriods: 5
+      Threshold: 1000
+      ComparisonOperator: GreaterThanThreshold
+      Dimensions:
+        - Name: InstanceId
+          Value: !Ref 'PublicInstanceAZ1'
+      Tags:
+        - Key: Name
+          Value: polystudentlab-traffic-alarm
